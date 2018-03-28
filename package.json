@@ -1,0 +1,23 @@
+{
+  "name": "joe-family",
+  "version": "1.0.0",
+  "description": "Joe familty tree : a command line app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nishants/joe-family-tree.git"
+  },
+  "keywords": [
+    "cli"
+  ],
+  "author": "nishant",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/nishants/joe-family-tree/issues"
+  },
+  "homepage": "https://github.com/nishants/joe-family-tree#readme",
+  "dependencies": {}
+}
