@@ -12,10 +12,6 @@
     - has name
     - has gender
     
-# Family tree operations
-    - getParentFamilyOf(Person)
-    -  
-
 # Cases
     - Find maternal uncle
         - mother = getParentFamilyOf(Person).wife

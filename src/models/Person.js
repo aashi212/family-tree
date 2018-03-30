@@ -4,4 +4,10 @@ class Person{
     this.name   = name;
     this.isMale = isMale;
   }
+
+  equals(person){
+    return this.id === person.id;
+  }
 }
+
+module.exports = Person;

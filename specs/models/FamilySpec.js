@@ -2,7 +2,7 @@ const
     assert = require('assert'),
     Family = require('../../src/models/Family');
 
-describe('Family', function() {
+describe('Family',()=> {
   it('has children, wife and husband', function() {
     const
         husband = {name: 'daddy'},
