@@ -4,7 +4,8 @@
   "description": "Joe familty tree : a command line app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./src/cli.js",
+    "test" : "mocha \"./specs/**/*Spec.js\""
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,7 @@
     "url": "https://github.com/nishants/joe-family-tree/issues"
   },
   "homepage": "https://github.com/nishants/joe-family-tree#readme",
-  "dependencies": {}
+  "dependencies": {
+    "mocha": "^5.0.5"
+  }
 }
