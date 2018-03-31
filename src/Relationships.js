@@ -63,6 +63,14 @@ class Relationships{
     return this.maternalUncleAndAuntsOf(personId).filter(males);
   }
 
+  maternalAuntsOf(personId){
+    return this.maternalUncleAndAuntsOf(personId).filter(females);
+  }
+
+  paternalAuntsOf(personId){
+    return this.paternalUncleAndAuntsOf(personId).filter(females);
+  }
+
   cousinsOf(personId){
   }
 

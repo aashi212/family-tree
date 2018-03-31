@@ -124,4 +124,18 @@ describe('Relationships',()=> {
     assert.deepEqual(actual, expected);
   });
 
+  it('should return maternal aunts', function() {
+    const
+        expected = [otherDaughter],
+        actual   = relationships.maternalAuntsOf('DaughtersDaughter');
+    assert.deepEqual(actual, expected);
+  });
+
+  it('should return paternal aunts', function() {
+    const
+        expected = [daughter, otherDaughter],
+        actual   = relationships.paternalAuntsOf('OtherSonsDaughter');
+    assert.deepEqual(actual, expected);
+  });
+
 });
