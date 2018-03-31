@@ -117,4 +117,11 @@ describe('Relationships',()=> {
     assert.deepEqual(actual, expected);
   });
 
+  it('should return maternal uncles', function() {
+    const
+        expected = [son, otherSon],
+        actual   = relationships.maternalUnclesOf('DaughtersDaughter');
+    assert.deepEqual(actual, expected);
+  });
+
 });

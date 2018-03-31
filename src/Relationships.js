@@ -48,21 +48,22 @@ class Relationships{
     return fathersParentFamily.children.filter(not(parentFamily.husband.id));
   }
 
+  maternalUncleAndAuntsOf(personId){
+    let parentFamily = this.familyTree.getParentFamilyOf(personId),
+        fathersParentFamily = this.familyTree.getParentFamilyOf(parentFamily.wife.id);
+
+    return fathersParentFamily.children.filter(not(parentFamily.wife.id));
+  }
+
   paternalUnclesOf(personId){
     return this.paternalUncleAndAuntsOf(personId).filter(males);
   }
 
+  maternalUnclesOf(personId){
+    return this.maternalUncleAndAuntsOf(personId).filter(males);
+  }
+
   cousinsOf(personId){
-    let parentFamily = this.familyTree.getParentFamilyOf(personId),
-        mothersParentFamily = this.familyTree.getParentFamilyOf(parentFamily.wife.id),
-        fathersParentFamily = this.familyTree.getParentFamilyOf(parentFamily.husband.id),
-        unclesAndAunts = mothersParentFamily.children.concat(fathersParentFamily.children);
-
-    return parentFamily
-
-        .children
-        .reduce((childrenChildren, child) => childrenChildren.concat(this.familyTree.getFamilyOf(child.id).children), [])
-        .filter(person => person.id !== personId)
   }
 
   brothersOf(personId){
