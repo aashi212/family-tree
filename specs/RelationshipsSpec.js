@@ -84,4 +84,18 @@ describe('Relationships',()=> {
     assert.deepEqual(actual, expected);
   });
 
+  it('should return mother', function() {
+    const
+        expected = mom,
+        actual   = relationships.motherOf('OtherSon');
+    assert.deepEqual(actual, expected);
+  });
+
+  it('should return father', function() {
+    const
+        expected = daughtersHubby,
+        actual   = relationships.fatherOf('DaughtersDaughter');
+    assert.deepEqual(actual, expected);
+  });
+
 });
