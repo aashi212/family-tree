@@ -1,6 +1,7 @@
 const
     males = person => person.isMale;
-    females = person => !person.isMale;
+    females = person => !person.isMale
+    not = personId => (person) => person.id !== personId;
 
 class Relationships{
   constructor(familyTree){
@@ -38,6 +39,30 @@ class Relationships{
         .getParentFamilyOf(personId)
         .children
         .filter(person => person.id !== personId);
+  }
+
+  paternalUncleAndAuntsOf(personId){
+    let parentFamily = this.familyTree.getParentFamilyOf(personId),
+        fathersParentFamily = this.familyTree.getParentFamilyOf(parentFamily.husband.id);
+
+    return fathersParentFamily.children.filter(not(parentFamily.husband.id));
+  }
+
+  paternalUnclesOf(personId){
+    return this.paternalUncleAndAuntsOf(personId).filter(males);
+  }
+
+  cousinsOf(personId){
+    let parentFamily = this.familyTree.getParentFamilyOf(personId),
+        mothersParentFamily = this.familyTree.getParentFamilyOf(parentFamily.wife.id),
+        fathersParentFamily = this.familyTree.getParentFamilyOf(parentFamily.husband.id),
+        unclesAndAunts = mothersParentFamily.children.concat(fathersParentFamily.children);
+
+    return parentFamily
+
+        .children
+        .reduce((childrenChildren, child) => childrenChildren.concat(this.familyTree.getFamilyOf(child.id).children), [])
+        .filter(person => person.id !== personId)
   }
 
   brothersOf(personId){

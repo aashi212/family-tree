@@ -15,18 +15,30 @@ describe('Relationships',()=> {
       otherSon = new Person('OtherSon', true),
       daughter = new Person('Daughter', false),
       otherDaughter = new Person('OtherDaughter', false),
+
       daughtersHubby   = new Person('DaughtersHubby', true),
       daughtersSon     = new Person('DaughtersSon', true),
       daughtersDaughter= new Person('DaughtersDaughter', false),
 
+      sonsWife = new Person('SonsWife', false),
+      sonsSon  = new Person('SonsSon', true),
+
+      otherSonsWife = new Person('OtherSonsWife', false),
+      otherSonsDaughter  = new Person('OtherSonsDaughter', false),
+
       rootFamily       = new Family(grandDad, grandMom, [dad]),
       childFamily      = new Family(dad, mom, [son, daughter, otherSon, otherDaughter]),
       grandChildFamily = new Family(daughtersHubby, daughter, [daughtersSon, daughtersDaughter]),
+      sonsFamily = new Family(son, sonsWife, [sonsSon]),
+      otherSonsFamily = new Family(otherSon, otherSonsWife, [otherSonsDaughter]),
+
       familyTree       = new FamilyTree(rootFamily),
       relationships    = new Relationships(familyTree);
 
   familyTree.addFamily(childFamily);
   familyTree.addFamily(grandChildFamily);
+  familyTree.addFamily(sonsFamily);
+  familyTree.addFamily(otherSonsFamily);
 
   it('should return brothers of male', function() {
     const
@@ -58,7 +70,7 @@ describe('Relationships',()=> {
 
   it('should return grand daughters', function() {
     const
-        expected = [daughtersDaughter],
+        expected = [daughtersDaughter, otherSonsDaughter],
         actual   = relationships.grandDaughterOf('Mom');
     assert.deepEqual(actual, expected);
   });
@@ -95,6 +107,13 @@ describe('Relationships',()=> {
     const
         expected = daughtersHubby,
         actual   = relationships.fatherOf('DaughtersDaughter');
+    assert.deepEqual(actual, expected);
+  });
+
+  it('should return paternal uncles', function() {
+    const
+        expected = [otherSon],
+        actual   = relationships.paternalUnclesOf('SonsSon');
     assert.deepEqual(actual, expected);
   });
 
