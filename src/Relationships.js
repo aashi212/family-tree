@@ -72,6 +72,10 @@ class Relationships{
   }
 
   cousinsOf(personId){
+    return this.maternalUncleAndAuntsOf(personId)
+        .concat(this.paternalUncleAndAuntsOf(personId))
+        .map(person => this.familyTree.getFamilyOf(person.id))
+        .reduce((cousins, family)=> cousins.concat(family.children), []);
   }
 
   brothersOf(personId){

@@ -29,8 +29,8 @@ describe('Relationships',()=> {
       rootFamily       = new Family(grandDad, grandMom, [dad]),
       childFamily      = new Family(dad, mom, [son, daughter, otherSon, otherDaughter]),
       grandChildFamily = new Family(daughtersHubby, daughter, [daughtersSon, daughtersDaughter]),
-      sonsFamily = new Family(son, sonsWife, [sonsSon]),
-      otherSonsFamily = new Family(otherSon, otherSonsWife, [otherSonsDaughter]),
+      sonsFamily       = new Family(son, sonsWife, [sonsSon]),
+      otherSonsFamily  = new Family(otherSon, otherSonsWife, [otherSonsDaughter]),
 
       familyTree       = new FamilyTree(rootFamily),
       relationships    = new Relationships(familyTree);
@@ -138,4 +138,17 @@ describe('Relationships',()=> {
     assert.deepEqual(actual, expected);
   });
 
+  it('should return maternal cousins', function() {
+    const
+        expected = [sonsSon, otherSonsDaughter],
+        actual   = relationships.cousinsOf('DaughtersDaughter');
+    assert.deepEqual(actual, expected);
+  });
+
+  it('should return paternal cousins', function() {
+    const
+        expected = [daughtersSon, daughtersDaughter, otherSonsDaughter],
+        actual   = relationships.cousinsOf('SonsSon');
+    assert.deepEqual(actual, expected);
+  });
 });
