@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./src/cli.js",
-    "test" : "mocha \"./specs/**/*Spec.js\""
+    "test": "mocha \"./specs/**/*Spec.js\""
   },
   "repository": {
     "type": "git",
