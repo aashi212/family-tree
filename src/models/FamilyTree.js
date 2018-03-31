@@ -1,13 +1,39 @@
-class FamilyTree{
-  constructor(rootFamily){
-    this.rootFamily  = rootFamily;
+const
+    createNode = (family) => {
+      return {
+        family,
+        childFamilies: []
+      }
+    },
+    findNode = (rootNode, select)=>{
+      let nodes = [rootNode];
+      while(nodes.length){
+        let node = nodes.pop();
+        if(select(node.family)){
+          return node;
+        }
+        nodes = nodes.concat(node.childFamilies);
+      }
+    };
+
+class FamilyTree {
+  constructor(rootFamily) {
+    this.rootFamilyNode = createNode(rootFamily);
   }
 
-  getFamilyOf(person){
-
+  addFamily(family) {
+    findNode(this.rootFamilyNode, family=> {
+      return family.isOf(family.husband.id) || family.isOf(family.wife.id);
+    }).childFamilies.push(createNode(family));
   }
 
-  getParentFamilyOf(person){
+  getParentFamilyOf(personId) {
+    return findNode(this.rootFamilyNode, family=> family.hasChild(personId)).family;
+  }
 
+  getFamilyOf(personId) {
+    return findNode(this.rootFamilyNode, family=> family.isOf(personId)).family;
   }
 }
+
+module.exports = FamilyTree;

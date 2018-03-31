@@ -18,4 +18,11 @@ describe('Person', ()=> {
 
     assert.equal(personOne.equals(personTwo), true);
   });
+
+  it('matches person by id', ()=> {
+    const
+        personOne = new Person('Ajay', true);
+
+    assert.equal(personOne.is('Ajay'), true);
+  });
 });

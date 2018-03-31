@@ -1,3 +1,20 @@
+Models 
+- Person	
+  - has gender
+  - has name
+  - has ID (same as name)
+- Family
+  - has wife
+  - has husband
+  - has children
+- Family Tree
+  - is a tree structure
+  - each node has a family
+  - each node has child families
+- Relationships
+  - has a family tree
+  - runs functions on family tree to get a relation
+
 # Family
     - has husband
     - has wife

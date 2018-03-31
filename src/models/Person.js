@@ -8,6 +8,10 @@ class Person{
   equals(person){
     return this.id === person.id;
   }
+
+  is(personId){
+    return this.id === personId;
+  }
 }
 
 module.exports = Person;
