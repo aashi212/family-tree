@@ -7,6 +7,20 @@ class Relationships{
     this.familyTree = familyTree;
   }
 
+  childrenOf(personId){
+    return this.familyTree
+        .getFamilyOf(personId)
+        .children
+  }
+
+  daughtersOf(personId){
+    return this.childrenOf(personId).filter(females)
+  }
+
+  sonsOf(personId){
+    return this.childrenOf(personId).filter(males)
+  }
+
   siblingsOf(personId){
     return this.familyTree
         .getParentFamilyOf(personId)
