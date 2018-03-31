@@ -17,14 +17,13 @@ describe('FamilyTree',()=> {
 
       rootFamily       = new Family(grandDad, grandMom, [dad]),
       childFamily      = new Family(dad, mom, [son, daughter]),
-      grandChildFamily = new Family(daughtersHubby, daughter, [daughtersSon]);
+      grandChildFamily = new Family(daughtersHubby, daughter, [daughtersSon]),
+      familyTree = new FamilyTree(rootFamily);
+
+  familyTree.addFamily(childFamily);
+  familyTree.addFamily(grandChildFamily);
 
   it('should return family of a person', function() {
-    const
-        familyTree = new FamilyTree(rootFamily);
-    familyTree.addFamily(childFamily);
-    familyTree.addFamily(grandChildFamily);
-
     const
         grandMomsFamily   = familyTree.getFamilyOf('GrandMom'),
         sonsParentFamily  = familyTree.getParentFamilyOf('Son'),
@@ -36,5 +35,12 @@ describe('FamilyTree',()=> {
 
     assert.equal(daughtersFamily.equals(grandChildFamily), true);
     assert.equal(daughtersSonParentFamily.equals(grandChildFamily), true);
+  });
+
+  it('should return empty family if child is not married', function() {
+    const
+        expected = [],
+        actual   = familyTree.getFamilyOf('DaughtersSon').children;
+    assert.deepEqual(actual, expected);
   });
 });

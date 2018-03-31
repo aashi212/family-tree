@@ -32,7 +32,8 @@ class FamilyTree {
   }
 
   getFamilyOf(personId) {
-    return findNode(this.rootFamilyNode, family=> family.isOf(personId)).family;
+    let familyNode = findNode(this.rootFamilyNode, family=> family.isOf(personId));
+    return familyNode ? familyNode.family : {children: []};
   }
 }
 

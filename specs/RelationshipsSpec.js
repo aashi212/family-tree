@@ -17,10 +17,11 @@ describe('Relationships',()=> {
       otherDaughter = new Person('OtherDaughter', false),
       daughtersHubby   = new Person('DaughtersHubby', true),
       daughtersSon     = new Person('DaughtersSon', true),
+      daughtersDaughter= new Person('DaughtersDaughter', false),
 
       rootFamily       = new Family(grandDad, grandMom, [dad]),
       childFamily      = new Family(dad, mom, [son, daughter, otherSon, otherDaughter]),
-      grandChildFamily = new Family(daughtersHubby, daughter, [daughtersSon]),
+      grandChildFamily = new Family(daughtersHubby, daughter, [daughtersSon, daughtersDaughter]),
       familyTree       = new FamilyTree(rootFamily),
       relationships    = new Relationships(familyTree);
 
@@ -52,6 +53,13 @@ describe('Relationships',()=> {
     const
         expected = [otherDaughter],
         actual   = relationships.sistersOf('Daughter');
+    assert.deepEqual(actual, expected);
+  });
+
+  it('should return grand daughters', function() {
+    const
+        expected = [daughtersDaughter],
+        actual   = relationships.grandDaughterOf('Mom');
     assert.deepEqual(actual, expected);
   });
 
