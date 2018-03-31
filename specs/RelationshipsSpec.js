@@ -194,4 +194,11 @@ describe('Relationships',()=> {
     assert.deepEqual(actual, expected);
   });
 
+  it('should return sisters husband in brother-in-laws', function() {
+    const
+        expected = [daughtersHubby, otherDaughtersHubby],
+        actual   = relationships.brotherInLawsOf('Son');
+    assert.deepEqual(actual, expected);
+  });
+
 });
