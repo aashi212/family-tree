@@ -1,4 +1,6 @@
-const males = person => person.isMale;
+const
+    males = person => person.isMale;
+    females = person => !person.isMale;
 
 class Relationships{
   constructor(familyTree){
@@ -9,6 +11,13 @@ class Relationships{
     return this.familyTree
         .getParentFamilyOf(personId)
         .children.filter(males)
+        .filter(person => person.id !== personId);
+  }
+
+  sistersOf(personId){
+    return this.familyTree
+        .getParentFamilyOf(personId)
+        .children.filter(females)
         .filter(person => person.id !== personId);
   }
 
