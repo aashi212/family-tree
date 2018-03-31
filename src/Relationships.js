@@ -78,6 +78,24 @@ class Relationships{
         .reduce((cousins, family)=> cousins.concat(family.children), []);
   }
 
+  sisterInLawsOf(personId){
+    const
+        siblings = this.familyTree
+            .getParentFamilyOf(personId)
+            .children.filter(not(personId)),
+        wivesOfBrother = siblings.filter(males)
+            .map((brother) => this.familyTree.getFamilyOf(brother.id).wife),
+        family = this.familyTree
+            .getFamilyOf(personId),
+        spouse =  !family.husband ? null : family.husband.id === personId ? family.wife : family.husband,
+        sistersOfSpouse= !spouse ? []
+            : this.familyTree
+                .getParentFamilyOf(spouse.id)
+                .children.filter(females)
+                .filter(not(spouse.id))
+    return wivesOfBrother.concat(sistersOfSpouse);
+  }
+
   brothersOf(personId){
     return this.siblingsOf(personId).filter(males)
   }

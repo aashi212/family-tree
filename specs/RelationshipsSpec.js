@@ -151,4 +151,27 @@ describe('Relationships',()=> {
         actual   = relationships.cousinsOf('SonsSon');
     assert.deepEqual(actual, expected);
   });
+
+  it('should return wives of brothers in sister-in-laws', function() {
+    const
+        expected = [sonsWife, otherSonsWife],
+        actual   = relationships.sisterInLawsOf('OtherDaughter');
+    assert.deepEqual(actual, expected);
+  });
+
+
+  it('should return sisters of husband in sister-in-laws', function() {
+    const
+        expected = [daughter, otherDaughter],
+        actual   = relationships.sisterInLawsOf('SonsWife');
+    assert.deepEqual(actual, expected);
+  });
+
+  it('should return sisters of wife in sister-in-laws', function() {
+    const
+        expected = [otherDaughter],
+        actual   = relationships.sisterInLawsOf('DaughtersHubby');
+    assert.deepEqual(actual, expected);
+  });
+
 });
