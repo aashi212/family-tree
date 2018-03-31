@@ -1,7 +1,8 @@
 const
-    males = person => person.isMale;
-    females = person => !person.isMale
-    not = personId => (person) => person.id !== personId;
+    males    = person => person.isMale;
+    females  = person => !person.isMale
+    not      = personId => (person) => person.id !== personId,
+    existing = p=> !!p;
 
 class Relationships{
   constructor(familyTree){
@@ -41,39 +42,67 @@ class Relationships{
         .filter(person => person.id !== personId);
   }
 
-  paternalUncleAndAuntsOf(personId){
+  fathersSiblings(personId){
     let parentFamily = this.familyTree.getParentFamilyOf(personId),
         fathersParentFamily = this.familyTree.getParentFamilyOf(parentFamily.husband.id);
 
     return fathersParentFamily.children.filter(not(parentFamily.husband.id));
   }
 
-  maternalUncleAndAuntsOf(personId){
+  mothersSiblings(personId){
     let parentFamily = this.familyTree.getParentFamilyOf(personId),
         fathersParentFamily = this.familyTree.getParentFamilyOf(parentFamily.wife.id);
 
     return fathersParentFamily.children.filter(not(parentFamily.wife.id));
   }
 
+  brotherInLawsOf(personId) {
+    const
+        siblings = this.familyTree
+            .getParentFamilyOf(personId)
+            .children.filter(not(personId)),
+        husbandOfSister = siblings.filter(females)
+            .map((sister) => this.familyTree.getFamilyOf(sister.id).husband)
+            .filter(existing),
+        family = this.familyTree
+            .getFamilyOf(personId),
+        spouse =  !family.husband ? null : family.husband.id === personId ? family.wife : family.husband,
+        brothersOfSpouse= !spouse ? []
+            : this.familyTree
+                .getParentFamilyOf(spouse.id)
+                .children.filter(males)
+                .filter(not(spouse.id));
+
+    return husbandOfSister.concat(brothersOfSpouse);
+  }
+
   paternalUnclesOf(personId){
-    return this.paternalUncleAndAuntsOf(personId).filter(males);
+    return this.fathersSiblings(personId)
+        .filter(males)
+        .concat(this.brotherInLawsOf(this.familyTree.getParentFamilyOf(personId).husband.id));
   }
 
   maternalUnclesOf(personId){
-    return this.maternalUncleAndAuntsOf(personId).filter(males);
+    return this.mothersSiblings(personId).filter(males)
+        .concat(this.brotherInLawsOf(this.familyTree.getParentFamilyOf(personId).wife.id));
+    ;
   }
 
   maternalAuntsOf(personId){
-    return this.maternalUncleAndAuntsOf(personId).filter(females);
+    return this.mothersSiblings(personId)
+        .filter(females)
+        .concat(this.sisterInLawsOf(this.familyTree.getParentFamilyOf(personId).wife.id));
   }
 
   paternalAuntsOf(personId){
-    return this.paternalUncleAndAuntsOf(personId).filter(females);
+    return this.fathersSiblings(personId)
+        .filter(females)
+        .concat(this.sisterInLawsOf(this.familyTree.getParentFamilyOf(personId).husband.id));
   }
 
   cousinsOf(personId){
-    return this.maternalUncleAndAuntsOf(personId)
-        .concat(this.paternalUncleAndAuntsOf(personId))
+    return this.mothersSiblings(personId)
+        .concat(this.fathersSiblings(personId))
         .map(person => this.familyTree.getFamilyOf(person.id))
         .reduce((cousins, family)=> cousins.concat(family.children), []);
   }
@@ -92,7 +121,8 @@ class Relationships{
             : this.familyTree
                 .getParentFamilyOf(spouse.id)
                 .children.filter(females)
-                .filter(not(spouse.id))
+                .filter(not(spouse.id));
+
     return wivesOfBrother.concat(sistersOfSpouse);
   }
 
