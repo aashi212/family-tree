@@ -1,7 +1,8 @@
 const
     FindRelative = require('./FindRelative'),
     AddChild = require('./AddChild'),
-    MostGirlChildren = require('./MostGirlChildren');
+    MostGirlChildren = require('./MostGirlChildren'),
+    FindRelation = require('./FindRelation');
 
 class CommandRunner{
   constructor(relationships){
@@ -9,6 +10,7 @@ class CommandRunner{
         new FindRelative(relationships),
         new AddChild(relationships),
         new MostGirlChildren(relationships),
+        new FindRelation(relationships),
     ];
     this.unknownCommandMessage =
         'Available Commands : \n' +
