@@ -6,13 +6,21 @@ class FindRelativeCommand extends Command{
   constructor(relationships){
     super(relationships);
     this.relationCommands = {
-      'mother'   : personId => relationships.motherOf(personId).name,
+      'paternaluncle'  : personId => join(relationships.paternalUnclesOf(personId)),
+      'maternaluncle'  : personId => join(relationships.maternalUnclesOf(personId)),
+      'paternalaunt'   : personId => join(relationships.paternalAuntsOf(personId)),
+      'maternalaunt'   : personId => join(relationships.maternalAuntsOf(personId)),
+      'sister-in-law'  : personId => join(relationships.sisterInLawsOf(personId)),
+      'brother-in-law' : personId => join(relationships.brotherInLawsOf(personId)),
+      'cousins'  : personId => join(relationships.cousinsOf(personId)),
       'father'   : personId => relationships.fatherOf(personId).name,
-      'sisters'  : personId => join(relationships.sistersOf(personId)),
-      'brothers' : personId => join(relationships.brothersOf(personId)),
-      'daughters': personId => join(relationships.daughtersOf(personId)),
-      'sons'     : personId => join(relationships.sonsOf(personId)),
+      'mother'   : personId => relationships.motherOf(personId).name,
       'children' : personId => join(relationships.childrenOf(personId)),
+      'sons'     : personId => join(relationships.sonsOf(personId)),
+      'daughters': personId => join(relationships.daughtersOf(personId)),
+      'brothers' : personId => join(relationships.brothersOf(personId)),
+      'sisters'  : personId => join(relationships.sistersOf(personId)),
+      'granddaughter' : personId => join(relationships.grandDaughterOf(personId)),
     };
   }
 
