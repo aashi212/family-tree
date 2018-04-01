@@ -1,4 +1,5 @@
 const
+    Person   = require('./models/Person'),
     males    = person => person.isMale;
     females  = person => !person.isMale
     not      = personId => (person) => !person.is(personId),
@@ -143,6 +144,13 @@ class Relationships{
         .filter(females);
   }
 
+  addSon(motherId, sonsName){
+    this.familyTree.addChild(motherId, new Person(sonsName, true));
+  }
+
+  addDaughter(motherId, daughterName){
+    this.familyTree.addChild(motherId, new Person(daughterName, false));
+  }
 }
 
 module.exports =  Relationships;

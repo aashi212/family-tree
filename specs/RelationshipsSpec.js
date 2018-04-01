@@ -201,4 +201,22 @@ describe('Relationships',()=> {
     assert.deepEqual(actual, expected);
   });
 
+  it('should add son to a family by mother', function() {
+    relationships.addSon('OtherDaughter', 'OtherDaughterNewSon')
+    const
+        expected = otherDaughter,
+        actual   = relationships.motherOf('OtherDaughterNewSon');
+
+    assert.deepEqual(actual, expected);
+  });
+
+  it('should add daughter to a family by mother', function() {
+    relationships.addDaughter('OtherDaughter', 'OtherDaughterNewDaughter')
+    const
+        expected = otherDaughter,
+        actual   = relationships.motherOf('OtherDaughterNewDaughter');
+
+    assert.deepEqual(actual, expected);
+  });
+
 });

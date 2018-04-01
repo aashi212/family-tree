@@ -1,9 +1,12 @@
-const FindRelative = require('./FindRelative');
+const
+    FindRelative = require('./FindRelative'),
+    AddChild = require('./AddChild');
 
 class CommandRunner{
   constructor(relationships){
     this.commands = [
-        new FindRelative(relationships)
+        new FindRelative(relationships),
+        new AddChild(relationships),
     ];
     this.unknownCommandMessage =
         'Available Commands : \n' +

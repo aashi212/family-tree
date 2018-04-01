@@ -43,4 +43,15 @@ describe('FamilyTree',()=> {
         actual   = familyTree.getFamilyOf('DaughtersSon').children;
     assert.deepEqual(actual, expected);
   });
+
+  it('should add a child to family', function() {
+    const newDaughter = new Person('Daughters Daughter', false);
+    familyTree.addChild('Daughter', newDaughter)
+
+    const
+        expected = [daughtersSon, newDaughter],
+        actual   = familyTree.getFamilyOf('Daughter').children;
+    assert.deepEqual(actual, expected);
+  });
+
 });

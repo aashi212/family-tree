@@ -36,6 +36,10 @@ class FamilyTree {
     let familyNode = findNode(this.rootFamilyNode, family=> family.isOf(personId));
     return familyNode ? familyNode.family : {children: []};
   }
+
+  addChild(motherId, child){
+    findNode(this.rootFamilyNode, family=> family.isOf(motherId)).family.children.push(child);
+  }
 }
 
 module.exports = FamilyTree;

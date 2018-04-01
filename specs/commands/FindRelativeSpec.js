@@ -9,7 +9,7 @@ describe('Find Relative Command', ()=> {
         findRelative  = new FindRelative(relationships),
         invalidCommands = [
           '',
-          'Person = person; Relation = ',
+          'Person = person; Relations = ',
           'Person = ; Relation = ',
           'Person; Relation',
           'Relation',
