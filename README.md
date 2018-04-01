@@ -15,6 +15,13 @@ Models
   - has a family tree
   - runs functions on family tree to get a relation
 
+Command Interpreter, 
+Commands 
+  - Person=<name> ; Relation = Brothers
+  - Mother=<name> ; Daughter=Vanya
+  - mothers
+  - Person=<name> ; Relative=<name> 
+    
 # Family
     - has husband
     - has wife

@@ -39,7 +39,7 @@ class Relationships{
     return this.familyTree
         .getParentFamilyOf(personId)
         .children
-        .filter(person => person.id !== personId);
+        .filter(not(personId));
   }
 
   fathersSiblings(personId){
