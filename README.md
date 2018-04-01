@@ -1,3 +1,6 @@
+Assumptions
+ - names are unique, or else are appended with I, II etc.
+ 
 Models 
 - Person	
   - has gender
