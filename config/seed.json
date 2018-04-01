@@ -1,0 +1,28 @@
+{
+  "families" : [
+    {
+      "husband": "Shan",
+      "wife"   : "Anga",
+      "sons"   : ["Ish", "Chit", "Vich"],
+      "daughters" : ["Satya"]
+    },
+    {
+      "husband": "Chit",
+      "wife"   : "Ambi",
+      "sons"   : ["Vrita", "Drita"],
+      "daughters" : []
+    },
+    {
+      "husband": "Drita",
+      "wife"   : "Jaya",
+      "sons"   : ["Jata"],
+      "daughters" : ["Driya"]
+    },
+    {
+      "husband": "Minu",
+      "wife"   : "Driya",
+      "sons"   : [],
+      "daughters" : []
+    }
+  ]
+}

@@ -1,24 +1,15 @@
-#!/usr/bin/env node
-
 const
+    seed = require('../config/seed.json'),
+    FamilyTreeLoader = require('./FamilyTreeLoader'),
+    Relationships = require('./Relationships'),
+    CommandRunner = require('./commands/CommandRunner'),
+
     cli = require('readline').createInterface({
       input: process.stdin,
       output: process.stdout
     }),
-    inputLabel  = 'Input  :' ,
-    outputLabel = 'Output :' ;
-
-
-// cli.prompt("Input : ");
-cli.write("Input : ");
+    commandRunner = new CommandRunner(new Relationships(FamilyTreeLoader.load(seed)));
 
 cli.on('line', (line) => {
-  let command = line.split(":")[1].trim();
-  console.log(command);
-  cli.write("Input : ");
+  console.log(commandRunner.interpret(line));
 });
-// cli.prompt();
-// }).on('close', () => {
-//   console.log('Have a great day!');
-// process.exit(0);
-// });
