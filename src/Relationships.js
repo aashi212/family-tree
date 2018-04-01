@@ -151,6 +151,16 @@ class Relationships{
   addDaughter(motherId, daughterName){
     this.familyTree.addChild(motherId, new Person(daughterName, false));
   }
+
+  motherWithMostDaughter(){
+    const
+        allFamilies = this.familyTree.getAllFamilies(),
+        mostDaughters = allFamilies.reduce(
+            (daughters, family)=> Math.max(daughters, family.children.filter(females).length), 0
+        );
+
+    return allFamilies.filter(f => f.children.filter(females).length === mostDaughters).map(f => f.wife);
+  }
 }
 
 module.exports =  Relationships;

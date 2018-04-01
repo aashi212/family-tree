@@ -54,4 +54,11 @@ describe('FamilyTree',()=> {
     assert.deepEqual(actual, expected);
   });
 
+  it('should return all families', function() {
+    const
+        expected = [rootFamily, grandChildFamily, childFamily],
+        actual   = familyTree.getAllFamilies();
+    assert.deepEqual(actual, expected);
+  });
+
 });

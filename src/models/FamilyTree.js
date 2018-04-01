@@ -40,6 +40,17 @@ class FamilyTree {
   addChild(motherId, child){
     findNode(this.rootFamilyNode, family=> family.isOf(motherId)).family.children.push(child);
   }
+  getAllFamilies(){
+    let
+        nodes = [this.rootFamilyNode],
+        families = [];
+    while(nodes.length){
+      let node = nodes.pop();
+      families.push(node.family);
+      nodes = nodes.concat(node.childFamilies);
+    }
+    return families;
+  }
 }
 
 module.exports = FamilyTree;
