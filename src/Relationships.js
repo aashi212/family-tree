@@ -1,7 +1,7 @@
 const
     males    = person => person.isMale;
     females  = person => !person.isMale
-    not      = personId => (person) => person.id !== personId,
+    not      = personId => (person) => !person.is(personId),
     existing = p=> !!p;
 
 class Relationships{
@@ -66,7 +66,7 @@ class Relationships{
             .filter(existing),
         family = this.familyTree
             .getFamilyOf(personId),
-        spouse =  !family.husband ? null : family.husband.id === personId ? family.wife : family.husband,
+        spouse =  !family.husband ? null : family.husband.is(personId) ? family.wife : family.husband,
         brothersOfSpouse= !spouse ? []
             : this.familyTree
                 .getParentFamilyOf(spouse.id)
@@ -116,7 +116,7 @@ class Relationships{
             .map((brother) => this.familyTree.getFamilyOf(brother.id).wife),
         family = this.familyTree
             .getFamilyOf(personId),
-        spouse =  !family.husband ? null : family.husband.id === personId ? family.wife : family.husband,
+        spouse =  !family.husband ? null : family.husband.is(personId) ? family.wife : family.husband,
         sistersOfSpouse= !spouse ? []
             : this.familyTree
                 .getParentFamilyOf(spouse.id)

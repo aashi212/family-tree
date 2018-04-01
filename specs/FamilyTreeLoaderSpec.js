@@ -3,7 +3,7 @@ const
     FamilyTreeLoader = require('../src/FamilyTreeLoader'),
     join = persons => persons.map(p => p.name).join(',');
 
-describe('SeedLoader', ()=> {
+describe('FamilyTreeLoader', ()=> {
   const config = {
     "families" : [
       {
@@ -37,8 +37,8 @@ describe('SeedLoader', ()=> {
   it('should load root family', ()=> {
     const rootFamily = familyTree.getFamilyOf('Shan');
 
-    assert.equal(rootFamily.husband.id, 'Shan');
-    assert.equal(rootFamily.wife.id, 'Anga');
+    assert.equal(rootFamily.husband.name, 'Shan');
+    assert.equal(rootFamily.wife.name, 'Anga');
 
     assert.equal(join(rootFamily.children), "Ish,Chit,Vich,Satya");
   });
@@ -46,8 +46,8 @@ describe('SeedLoader', ()=> {
   it('should load child family', ()=> {
     const childFamily = familyTree.getFamilyOf('Chit');
 
-    assert.equal(childFamily.husband.id, 'Chit');
-    assert.equal(childFamily.wife.id, 'Ambi');
+    assert.equal(childFamily.husband.name, 'Chit');
+    assert.equal(childFamily.wife.name, 'Ambi');
 
     assert.equal(join(childFamily.children), "Vrita,Drita");
   });
@@ -55,8 +55,8 @@ describe('SeedLoader', ()=> {
   it('should load grandchild family', ()=> {
     const childFamily = familyTree.getFamilyOf('Minu');
 
-    assert.equal(childFamily.husband.id, 'Minu');
-    assert.equal(childFamily.wife.id, 'Driya');
+    assert.equal(childFamily.husband.name, 'Minu');
+    assert.equal(childFamily.wife.name, 'Driya');
 
     assert.equal(join(childFamily.children), "");
   });

@@ -1,6 +1,6 @@
 class Person{
   constructor(name, isMale){
-    this.id     = name;
+    this.id     = name.toLowerCase();
     this.name   = name;
     this.isMale = isMale;
   }
@@ -10,7 +10,7 @@ class Person{
   }
 
   is(personId){
-    return this.id === personId;
+    return this.id === personId.toLowerCase();
   }
 }
 

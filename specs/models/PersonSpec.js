@@ -6,7 +6,7 @@ describe('Person', ()=> {
   it('has name, id and gender', ()=> {
     const person = new Person('Ajay', true);
 
-    assert.equal(person.id, 'Ajay');
+    assert.equal(person.id, 'ajay');
     assert.equal(person.name, 'Ajay');
     assert.equal(person.isMale, true);
   });
