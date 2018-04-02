@@ -23,6 +23,55 @@
       "wife"   : "Driya",
       "sons"   : [],
       "daughters" : []
+    },
+    {
+      "husband": "Vich",
+      "wife"   : "Lika",
+      "sons"   : ["Vila"],
+      "daughters" : ["Chika"]
+    },
+    {
+      "husband": "Vila",
+      "wife"   : "Jnki",
+      "sons"   : [],
+      "daughters" : ["Lavnya"]
+    },
+    {
+      "husband": "Gru",
+      "wife"   : "Lavnya",
+      "sons"   : [],
+      "daughters" : []
+    },
+    {
+      "husband": "Kpila",
+      "wife"   : "Chika",
+      "sons"   : [],
+      "daughters" : []
+    },
+    {
+      "husband": "Vyan",
+      "wife"   : "Satya",
+      "sons"   : ["Savya", "Saayan"],
+      "daughters" : ["Satvy"]
+    },
+    {
+      "husband": "Asva",
+      "wife"   : "Satvy",
+      "sons"   : [],
+      "daughters" : []
+    },
+    {
+      "husband": "Savya",
+      "wife"   : "Krpi",
+      "sons"   : ["Kriya"],
+      "daughters" : []
+    },
+    {
+      "husband": "Saayan",
+      "wife"   : "Mina",
+      "sons"   : ["Misa"],
+      "daughters" : []
     }
+
   ]
 }
