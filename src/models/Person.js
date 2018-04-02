@@ -12,6 +12,10 @@ class Person{
   is(personId){
     return this.id === personId.toLowerCase();
   }
+
+  static unknown(){
+    return {... new Person(''),is : personId => false, equals: person =>  false };
+  }
 }
 
 module.exports = Person;

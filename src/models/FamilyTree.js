@@ -1,4 +1,5 @@
 const
+    Person = require('./Person'),
     createNode = (family) => {
       return {
         family,
@@ -14,6 +15,9 @@ const
         }
         nodes = nodes.concat(node.children);
       }
+    },
+    missingFamily = ()=> {
+      return {husband: Person.unknown(), wife: Person.unknown(), children: []}
     };
 
 class FamilyTree {
@@ -29,12 +33,12 @@ class FamilyTree {
 
   getParentFamilyOf(personId) {
     let familyNode = findNode(this.rootFamilyNode, family=> family.hasChild(personId));
-    return familyNode ? familyNode.family : {children: []};
+    return familyNode ? familyNode.family : missingFamily();
   }
 
   getFamilyOf(personId) {
     let familyNode = findNode(this.rootFamilyNode, family=> family.isOf(personId));
-    return familyNode ? familyNode.family : {children: []};
+    return familyNode ? familyNode.family : missingFamily();
   }
 
   addChild(motherId, child){
