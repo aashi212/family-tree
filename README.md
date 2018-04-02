@@ -1,59 +1,86 @@
-Assumptions
- - names are unique, or else are appended with I, II etc.
- 
-Models 
-- Person	
+# Building and Running
+
+- Install
+
+  ```bash
+  yarn install
+  ```
+
+- Lint and run tests
+
+  ```bash
+  yarn build
+  ```
+
+- Run CLI
+
+  ```
+  yarn start
+  ```
+
+
+
+
+#### Third party libraries
+
+- **mocha** : for organizing tests
+- **eslint**  : for linting
+
+
+
+
+# About Solution
+
+#### **Assumptions**
+
+ - names of family members are unique, or else are appended with I, II etc.
+
+
+
+#### **Models** 
+
+- **Person**	
+
   - has gender
   - has name
-  - has ID (same as name)
-- Family
+  - has ID (lowercase of name)
+- **Family**
   - has wife
   - has husband
   - has children
-- Family Tree
+- **Family Tree**
   - is a tree structure
-  - each node has a family
-  - each node has child families
-- Relationships
+  - each node has a family 
+  - each node can have child nodes (containing family of children)
+- **Relationships**
   - has a family tree
   - runs functions on family tree to get a relation
 
-Command Interpreter, 
-Commands 
-  - Person=<name> ; Relation = Brothers
-  - Mother=<name> ; Daughter=Vanya
-  - mothers
-  - Person=<name> ; Relative=<name> 
-    
-# Family
-    - has husband
-    - has wife
-    - has children
 
-# Family tree
-    - has a root family
-    - getFamilyOf(Person)
-    - getParentFamliyOf(Person)
 
-# Person
-    - has name
-    - has gender
-    
-# Cases
-    - Find maternal uncle
-        - mother = getParentFamilyOf(Person).wife
-        - maternalUncle = getParentFamilyOf(mother).children(filterMales)
-        
-    - Find sister in law
-        - family  = getParentFamilyOf(Person)
-        - bhabhis = family.children.(filterMales).forEach(findFamily).map(wives)
-        - salis   = getParentFamilyOf(getFamilyOf(Person).wife).chidlren.filterFemales
-        
-    - Find cousins
-        - family  = getParentFamilyOf(Person)
-        - paternalCousins = getParentFamilyOf(family.husband).children.map(getFamily).collect(children)
-        - maternalCousins = getParentFamilyOf(family.wife).children.map(getFamily).collect(children)
-        
-    - find grand daughters  
-        - family = findFamilyOf(Person)
-        - grandDaughters = family.chilren.map(getFamilyOf).collect(children).filterFemales
+#### **Command Interpreter Design**
+
+- **CLI** 
+  - listens to console
+  - invokes **CommandRunner** for every input
+- **Command Runner**
+  - contains list of commands
+  - for every input, finds a relevant command
+  - invokes command and returns output
+- **Command**
+  - Is super class of all commands
+  - appliesTo(input) : returns true if command applies to user input
+  - execute(input) : runs user command on relationships and returns output
+  - usage() : returns sample usage for a command
+- **FindRelation Command**
+  - command to find persons of a particular relation
+  - e.g Person=<name> ; Relative = <relative-name>
+- **FindRelative Comamnd**
+  - command to find relation to a relative 
+  - e.g. Person=<name> ; Relation = <relation-name>
+- **AddChild Command**
+  - adds a child to a mother in family tree
+  - e.g. Mother=<name> ; Son/Daughter = <child-name>
+- **MostGirlChildren Command**
+  - returns mothers with most number of girl children
+  - e.g Most Girl Children
