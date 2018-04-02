@@ -39,9 +39,15 @@ class FindRelativeCommand extends Command{
     return {personId, relation, success: hasPerson && hasRelation && !!personId && !!relation};
   }
 
+  hint(){
+    return 'Available Options :\n'+ Object.keys(this.relationCommands).join(', ');
+  }
+
   _execute(input){
-    const params = this.parse(input);
-    return this.relationCommands[params.relation](params.personId);
+    const
+        params = this.parse(input),
+        relation = this.relationCommands[params.relation];
+    return relation ? relation(params.personId) : this.hint();
   }
 }
 
