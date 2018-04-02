@@ -25,16 +25,16 @@ class FindRelativeCommand extends Command{
   }
 
   usage(){
-    return 'Person=<name> ; Relation = <relation-name>'
+    return 'Person=<name> ; Relation = <relation-name>';
   }
 
   parse(input){
     const
-        params   = input.replace(/ /g, '').toLowerCase().split(';'),
-        personId = params[0].split("=")[1],
-        hasPerson = params[0].split("=")[0] === 'person',
-        relation = params[1].split("=")[1],
-        hasRelation = params[1].split("=")[0] === 'relation';
+        params    = input.replace(/ /g, '').toLowerCase().split(';'),
+        personId  = params[0].split('=')[1],
+        hasPerson = params[0].split('=')[0] === 'person',
+        relation  = params[1].split('=')[1],
+        hasRelation = params[1].split('=')[0] === 'relation';
 
     return {personId, relation, success: hasPerson && hasRelation && !!personId && !!relation};
   }

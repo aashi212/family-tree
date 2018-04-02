@@ -2,8 +2,8 @@ const
     createNode = (family) => {
       return {
         family,
-        childFamilies: []
-      }
+        children: []
+      };
     },
     findNode = (rootNode, select)=>{
       let nodes = [rootNode];
@@ -12,7 +12,7 @@ const
         if(select(node.family)){
           return node;
         }
-        nodes = nodes.concat(node.childFamilies);
+        nodes = nodes.concat(node.children);
       }
     };
 
@@ -24,7 +24,7 @@ class FamilyTree {
   addFamily(family) {
     findNode(this.rootFamilyNode, family=> {
       return family.isOf(family.husband.id) || family.isOf(family.wife.id);
-    }).childFamilies.push(createNode(family));
+    }).children.push(createNode(family));
   }
 
   getParentFamilyOf(personId) {
@@ -47,7 +47,7 @@ class FamilyTree {
     while(nodes.length){
       let node = nodes.pop();
       families.push(node.family);
-      nodes = nodes.concat(node.childFamilies);
+      nodes = nodes.concat(node.children);
     }
     return families;
   }

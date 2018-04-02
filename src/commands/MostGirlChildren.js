@@ -7,16 +7,16 @@ class MostGirlChildren extends Command{
   }
 
   usage(){
-    return 'Most Girl Children'
+    return 'Most Girl Children';
   }
 
   parse(input){
     return {
       success: input.replace(/ /g,'').toLowerCase() === 'mostgirlchildren'
-    }
+    };
   }
 
-  _execute(input){
+  _execute(){
     return this.relationships.motherWithMostDaughter().map(m => m.name).join(',');
   }
 }

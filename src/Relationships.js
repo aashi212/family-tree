@@ -1,7 +1,7 @@
 const
     Person   = require('./models/Person'),
-    males    = person => person.isMale;
-    females  = person => !person.isMale
+    males    = person => person.isMale,
+    females  = person => !person.isMale,
     not      = personId => (person) => !person.is(personId),
     existing = p=> !!p;
 
@@ -13,27 +13,27 @@ class Relationships{
   fatherOf(personId){
     return this.familyTree
         .getParentFamilyOf(personId)
-        .husband
+        .husband;
   }
 
   motherOf(personId){
     return this.familyTree
         .getParentFamilyOf(personId)
-        .wife
+        .wife;
   }
 
   childrenOf(personId){
     return this.familyTree
         .getFamilyOf(personId)
-        .children
+        .children;
   }
 
   daughtersOf(personId){
-    return this.childrenOf(personId).filter(females)
+    return this.childrenOf(personId).filter(females);
   }
 
   sonsOf(personId){
-    return this.childrenOf(personId).filter(males)
+    return this.childrenOf(personId).filter(males);
   }
 
   siblingsOf(personId){
@@ -43,96 +43,78 @@ class Relationships{
         .filter(not(personId));
   }
 
-  fathersSiblings(personId){
-    let parentFamily = this.familyTree.getParentFamilyOf(personId),
-        fathersParentFamily = this.familyTree.getParentFamilyOf(parentFamily.husband.id);
+  spouseOf(personId){
+    const family = this.familyTree.getFamilyOf(personId);
+    return !family.husband ? null : family.husband.is(personId) ? family.wife : family.husband;
+  }
 
-    return fathersParentFamily.children.filter(not(parentFamily.husband.id));
+  fathersSiblings(personId){
+    const parentFamily = this.familyTree.getParentFamilyOf(personId);
+    return this.siblingsOf(parentFamily.husband.id);
   }
 
   mothersSiblings(personId){
-    let parentFamily = this.familyTree.getParentFamilyOf(personId),
-        fathersParentFamily = this.familyTree.getParentFamilyOf(parentFamily.wife.id);
-
-    return fathersParentFamily.children.filter(not(parentFamily.wife.id));
-  }
-
-  brotherInLawsOf(personId) {
-    const
-        siblings = this.familyTree
-            .getParentFamilyOf(personId)
-            .children.filter(not(personId)),
-        husbandOfSister = siblings.filter(females)
-            .map((sister) => this.familyTree.getFamilyOf(sister.id).husband)
-            .filter(existing),
-        family = this.familyTree
-            .getFamilyOf(personId),
-        spouse =  !family.husband ? null : family.husband.is(personId) ? family.wife : family.husband,
-        brothersOfSpouse= !spouse ? []
-            : this.familyTree
-                .getParentFamilyOf(spouse.id)
-                .children.filter(males)
-                .filter(not(spouse.id));
-
-    return husbandOfSister.concat(brothersOfSpouse);
+    const parentFamily = this.familyTree.getParentFamilyOf(personId);
+    return this.siblingsOf(parentFamily.wife.id);
   }
 
   paternalUnclesOf(personId){
-    return this.fathersSiblings(personId)
-        .filter(males)
-        .concat(this.brotherInLawsOf(this.familyTree.getParentFamilyOf(personId).husband.id));
+    const father = this.fatherOf(personId);
+    return this.brothersOf(father.id)
+            .concat(this.brotherInLawsOf(father.id));
   }
 
   maternalUnclesOf(personId){
-    return this.mothersSiblings(personId).filter(males)
-        .concat(this.brotherInLawsOf(this.familyTree.getParentFamilyOf(personId).wife.id));
-    ;
+    const mother = this.motherOf(personId);
+    return this.brothersOf(mother.id)
+        .concat(this.brotherInLawsOf(mother.id));
   }
 
   maternalAuntsOf(personId){
-    return this.mothersSiblings(personId)
-        .filter(females)
-        .concat(this.sisterInLawsOf(this.familyTree.getParentFamilyOf(personId).wife.id));
-  }
+    const mother = this.motherOf(personId);
+    return this.sistersOf(mother.id)
+        .concat(this.sisterInLawsOf(mother.id));
+    }
 
   paternalAuntsOf(personId){
-    return this.fathersSiblings(personId)
-        .filter(females)
-        .concat(this.sisterInLawsOf(this.familyTree.getParentFamilyOf(personId).husband.id));
+    const father = this.fatherOf(personId);
+    return this.sistersOf(father.id)
+        .concat(this.sisterInLawsOf(father.id));
   }
 
   cousinsOf(personId){
     return this.mothersSiblings(personId)
         .concat(this.fathersSiblings(personId))
-        .map(person => this.familyTree.getFamilyOf(person.id))
-        .reduce((cousins, family)=> cousins.concat(family.children), []);
+        .reduce((cousins, person) => cousins.concat(this.childrenOf(person.id)), []);
+  }
+
+  brotherInLawsOf(personId) {
+    const
+        husbandOfSisters = this.siblingsOf(personId).filter(females)
+            .map((sister) => this.familyTree.getFamilyOf(sister.id).husband)
+            .filter(existing),
+        spouse =  this.spouseOf(personId),
+        brothersOfSpouse= !spouse ? [] : this.brothersOf(spouse.id);
+
+    return husbandOfSisters.concat(brothersOfSpouse);
   }
 
   sisterInLawsOf(personId){
     const
-        siblings = this.familyTree
-            .getParentFamilyOf(personId)
-            .children.filter(not(personId)),
-        wivesOfBrother = siblings.filter(males)
+        wivesOfBrother = this.siblingsOf(personId).filter(males)
             .map((brother) => this.familyTree.getFamilyOf(brother.id).wife),
-        family = this.familyTree
-            .getFamilyOf(personId),
-        spouse =  !family.husband ? null : family.husband.is(personId) ? family.wife : family.husband,
-        sistersOfSpouse= !spouse ? []
-            : this.familyTree
-                .getParentFamilyOf(spouse.id)
-                .children.filter(females)
-                .filter(not(spouse.id));
+        spouse =  this.spouseOf(personId),
+        sistersOfSpouse= !spouse ? [] : this.sistersOf(spouse.id);
 
     return wivesOfBrother.concat(sistersOfSpouse);
   }
 
   brothersOf(personId){
-    return this.siblingsOf(personId).filter(males)
+    return this.siblingsOf(personId).filter(males);
   }
 
   sistersOf(personId){
-    return this.siblingsOf(personId).filter(females)
+    return this.siblingsOf(personId).filter(females);
   }
 
   grandDaughterOf(personId){

@@ -16,24 +16,24 @@ class FindRelativeCommand extends Command{
       'Cousin'         : (personId, relative) => contains(relationships.cousinsOf(personId), relative),
       'Brother-in-law' : (personId, relative) => contains(relationships.brotherInLawsOf(personId), relative),
       'Sister-in-law'  : (personId, relative) => contains(relationships.sisterInLawsOf(personId), relative),
-      'Maternal Aunt'   : (personId, relative) => contains(relationships.maternalAuntsOf(personId), relative),
-      'Paternal Aunt'   : (personId, relative) => contains(relationships.paternalAuntsOf(personId), relative),
-      'Maternal Uncle'  : (personId, relative) => contains(relationships.maternalUnclesOf(personId), relative),
-      'Paternal Uncle'  : (personId, relative) => contains(relationships.paternalUnclesOf(personId), relative),
+      'Maternal Aunt'  : (personId, relative) => contains(relationships.maternalAuntsOf(personId), relative),
+      'Paternal Aunt'  : (personId, relative) => contains(relationships.paternalAuntsOf(personId), relative),
+      'Maternal Uncle' : (personId, relative) => contains(relationships.maternalUnclesOf(personId), relative),
+      'Paternal Uncle' : (personId, relative) => contains(relationships.paternalUnclesOf(personId), relative),
     };
   }
 
   usage(){
-    return 'Person=<name> ; Relative = <relative-name>'
+    return 'Person=<name> ; Relative = <relative-name>';
   }
 
   parse(input){
     const
         params   = input.replace(/ /g, '').split(';'),
-        personId = params[0].split("=")[1].toLowerCase(),
-        hasPerson = params[0].split("=")[0].toLowerCase() === 'person',
-        relative = params[1].split("=")[1],
-        hasRelative= params[1].split("=")[0].toLowerCase() === 'relative';
+        personId = params[0].split('=')[1].toLowerCase(),
+        hasPerson = params[0].split('=')[0].toLowerCase() === 'person',
+        relative = params[1].split('=')[1],
+        hasRelative= params[1].split('=')[0].toLowerCase() === 'relative';
 
     return {personId, relative, success: hasPerson && hasRelative && !!personId && !!relative};
   }

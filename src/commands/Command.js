@@ -15,7 +15,7 @@ class Command {
     try{
       return this._execute(input);
     }catch(error){
-      return 'invalid command'
+      return 'Failed to execute command.';
     }
   }
 }

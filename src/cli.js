@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */
+
 const
     seed = require('../config/seed.json'),
     FamilyTreeLoader = require('./FamilyTreeLoader'),

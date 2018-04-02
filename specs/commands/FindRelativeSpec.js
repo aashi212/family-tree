@@ -27,7 +27,7 @@ describe('Find Relative Command', ()=> {
         },
         findRelative  = new FindRelative(relationships),
         command   = 'Person = person; Relation = Mother',
-        expected  = 'invalid command',
+        expected  = 'Failed to execute command.',
         actual    = findRelative.execute(command);
 
     assert.equal(findRelative.appliesTo(command), true);
