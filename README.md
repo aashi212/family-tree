@@ -3,19 +3,19 @@
 - Install
 
   ```bash
-  yarn install
+  npm install
   ```
 
 - Lint and run tests
 
   ```bash
-  yarn build
+  npm run build
   ```
 
 - Run CLI
 
   ```
-  yarn start
+  npm start
   ```
 
 

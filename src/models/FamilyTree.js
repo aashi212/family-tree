@@ -17,7 +17,7 @@ const
       }
     },
     missingFamily = ()=> {
-      return {husband: Person.unknown(), wife: Person.unknown(), children: []}
+      return {husband: Person.unknown(), wife: Person.unknown(), children: []};
     };
 
 class FamilyTree {
