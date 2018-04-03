@@ -217,13 +217,6 @@ describe('Relationships',()=> {
     assert.deepEqual(actual, expected);
   });
 
-  it('should find mother with most children', function() {
-    const
-        expected = [mom],
-        actual   = relationships.motherWithMostDaughter();
-    assert.deepEqual(actual, expected);
-  });
-
   it('should find uncles', function() {
     const
         expected = [otherSon, daughtersHubby, otherDaughtersHubby],

@@ -96,14 +96,6 @@ describe('Find Relative Command', ()=> {
             command : 'Person = person; Relation = cousins',
             expected: 'cousin1,cousin2',
           },{
-            name    : 'should find brother in law',
-            command : 'Person = person; Relation = Brother-in-laws',
-            expected: 'brow-law-1,brow-law-2',
-          },{
-            name    : 'should find sister in law',
-            command : 'Person = person; Relation = Sister-in-laws',
-            expected: 'sis-law-1,sis-law-2',
-          },{
             name    : 'should find aunts',
             command : 'Person = person; Relation = aunts',
             expected: 'aunt-1,aunt-2',
