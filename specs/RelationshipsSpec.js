@@ -95,6 +95,13 @@ describe('Relationships',()=> {
     assert.deepEqual(actual, expected);
   });
 
+  it('should return grand mother', function() {
+    const
+        expected = mom,
+        actual   = relationships.grandMotherOf('SonsSon');
+    assert.deepEqual(actual, expected);
+  });
+
   it('should return daughters', function() {
     const
         expected = [daughtersDaughter],

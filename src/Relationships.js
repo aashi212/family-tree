@@ -149,6 +149,10 @@ class Relationships{
     return this.fatherOf(this.fatherOf(personId).id);
   }
 
+  grandMotherOf(personId){
+    return this.motherOf(this.fatherOf(personId).id);
+  }
+
   addSon(motherId, sonsName){
     this.familyTree.addChild(motherId, new Person(sonsName, true));
   }
