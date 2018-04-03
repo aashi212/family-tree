@@ -116,20 +116,6 @@ describe('Relationships',()=> {
     assert.deepEqual(actual, expected);
   });
 
-  it('should return paternal uncles', function() {
-    const
-        expected = [otherSon, daughtersHubby, otherDaughtersHubby],
-        actual   = relationships.paternalUnclesOf('SonsSon');
-    assert.deepEqual(actual, expected);
-  });
-
-  it('should return maternal uncles', function() {
-    const
-        expected = [son, otherSon, otherDaughtersHubby],
-        actual   = relationships.maternalUnclesOf('DaughtersDaughter');
-    assert.deepEqual(actual, expected);
-  });
-
   it('should return maternal aunts', function() {
     const
         expected = [otherDaughter, sonsWife, otherSonsWife],
@@ -216,6 +202,15 @@ describe('Relationships',()=> {
         actual   = relationships.motherWithMostDaughter();
     assert.deepEqual(actual, expected);
   });
+
+  it('should find uncles', function() {
+    const
+        expected = [otherSon, daughtersHubby, otherDaughtersHubby],
+        actual   = relationships.unclesOf('SonsSon');
+
+    assert.deepEqual(actual, expected);
+  });
+
 
   it('should add daughter to a family by mother', function() {
     relationships.addDaughter('OtherDaughter', 'OtherDaughterNewDaughter')

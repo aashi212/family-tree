@@ -19,23 +19,13 @@
   ```
 
 
-
-
 #### Third party libraries
 
 - **mocha** : for organizing tests
 - **eslint**  : for linting
 
 
-
-
 # About Solution
-
-#### **Assumptions**
-
- - names of family members are unique, or else are appended with I, II etc.
-
-
 
 #### **Models** 
 

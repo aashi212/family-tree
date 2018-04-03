@@ -70,6 +70,12 @@ class Relationships{
         .concat(this.brotherInLawsOf(mother.id));
   }
 
+  unclesOf(personId){
+    const uncles = this.paternalUnclesOf(personId)
+        .concat(this.maternalUnclesOf(personId));
+    return uncles.filter((uncle, index) => uncles.indexOf(uncle) === index);
+  }
+
   maternalAuntsOf(personId){
     const mother = this.motherOf(personId);
     return this.sistersOf(mother.id)

@@ -7,8 +7,7 @@ class FindRelativeCommand extends Command{
     super(relationships);
     this.relationCommands = {
       'paternaluncle'  : personId => join(relationships.paternalUnclesOf(personId)),
-      'maternaluncle'  : personId => join(relationships.maternalUnclesOf(personId)),
-      'paternalaunt'   : personId => join(relationships.paternalAuntsOf(personId)),
+      'uncles'          : personId => join(relationships.unclesOf(personId)),
       'maternalaunt'   : personId => join(relationships.maternalAuntsOf(personId)),
       'sister-in-laws'  : personId => join(relationships.sisterInLawsOf(personId)),
       'brother-in-laws' : personId => join(relationships.brotherInLawsOf(personId)),
