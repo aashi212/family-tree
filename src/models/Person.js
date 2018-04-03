@@ -14,7 +14,7 @@ class Person{
   }
 
   static unknown(){
-    return {... new Person(''),is : personId => false, equals: person =>  false };
+    return {... new Person(''),is : () => false, equals: () =>  false };
   }
 }
 
