@@ -45,6 +45,7 @@ describe('Find Relative Command', ()=> {
           sonsOf      : (personId)=> {if(personId === 'person') return [{name: 'son1'}, {name: 'son2'}]},
           childrenOf  : (personId)=> {if(personId === 'person') return [{name: 'child1'}, {name: 'child2'}]},
           grandDaughterOf  : (personId)=> {if(personId === 'person') return [{name: 'grand-daughter1'}, {name: 'grand-daughter2'}]},
+          grandSonOf       : (personId)=> {if(personId === 'person') return [{name: 'grand-son1'}, {name: 'grand-son2'}]},
           cousinsOf        : (personId)=> {if(personId === 'person') return [{name: 'cousin1'}, {name: 'cousin2'}]},
           brotherInLawsOf  : (personId)=> {if(personId === 'person') return [{name: 'brow-law-1'}, {name: 'brow-law-2'}]},
           sisterInLawsOf   : (personId)=> {if(personId === 'person') return [{name: 'sis-law-1'}, {name: 'sis-law-2'}]},
@@ -108,6 +109,10 @@ describe('Find Relative Command', ()=> {
             name    : 'should find uncles',
             command : 'Person = person; Relation = uncles',
             expected: 'uncle-1,uncle-2',
+          },{
+            name    : 'should find grandson',
+            command : 'Person = person; Relation = grand son',
+            expected: 'grand-son1,grand-son2',
           },
         ];
 

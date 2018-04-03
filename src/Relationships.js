@@ -129,13 +129,20 @@ class Relationships{
     return this.siblingsOf(personId).filter(females);
   }
 
-  grandDaughterOf(personId){
+  grandChildrenOf(personId){
     return this.familyTree
         .getFamilyOf(personId)
         .children
         .reduce((childFamilies, child) => childFamilies.concat(this.familyTree.getFamilyOf(child.id)), [])
-        .reduce((grandChildren, family) => grandChildren.concat(family.children), [])
-        .filter(females);
+        .reduce((grandChildren, family) => grandChildren.concat(family.children), []);
+  }
+
+  grandDaughterOf(personId){
+    return this.grandChildrenOf(personId).filter(females);
+  }
+
+  grandSonOf(personId){
+    return this.grandChildrenOf(personId).filter(males);
   }
 
   addSon(motherId, sonsName){

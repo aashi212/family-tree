@@ -19,6 +19,7 @@ class FindRelativeCommand extends Command{
       'brothers' : personId => join(relationships.brothersOf(personId)),
       'sisters'  : personId => join(relationships.sistersOf(personId)),
       'granddaughter' : personId => join(relationships.grandDaughterOf(personId)),
+      'grandson' : personId => join(relationships.grandSonOf(personId)),
     };
   }
 
