@@ -88,17 +88,31 @@ describe('Relationships',()=> {
     assert.deepEqual(actual, expected);
   });
 
-  it('should return grandfather', function() {
+  it('should return paternal grandfather', function() {
     const
-        expected = dad,
+        expected = [dad],
         actual   = relationships.grandFatherOf('SonsSon');
     assert.deepEqual(actual, expected);
   });
 
-  it('should return grand mother', function() {
+  it('should return maternal grandfather', function() {
     const
-        expected = mom,
+        expected = [dad],
+        actual   = relationships.grandFatherOf('DaughtersDaughter');
+    assert.deepEqual(actual, expected);
+  });
+
+  it('should return paternal grand mother', function() {
+    const
+        expected = [mom],
         actual   = relationships.grandMotherOf('SonsSon');
+    assert.deepEqual(actual, expected);
+  });
+
+  it('should return maternal grand mother', function() {
+    const
+        expected = [mom],
+        actual   = relationships.grandMotherOf('DaughtersDaughter');
     assert.deepEqual(actual, expected);
   });
 

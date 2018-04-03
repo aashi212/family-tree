@@ -3,7 +3,8 @@ const
     males    = person => person.isMale,
     females  = person => !person.isMale,
     not      = personId => (person) => !person.is(personId),
-    existing = p=> !!p;
+    existing = p=> !!p,
+    known    = p=> !p.isUnknown();
 
 class Relationships{
   constructor(familyTree){
@@ -146,11 +147,15 @@ class Relationships{
   }
 
   grandFatherOf(personId){
-    return this.fatherOf(this.fatherOf(personId).id);
+    return [this.fatherOf(this.fatherOf(personId).id),
+      this.fatherOf(this.motherOf(personId).id)]
+        .filter(known);
   }
 
   grandMotherOf(personId){
-    return this.motherOf(this.fatherOf(personId).id);
+    return [this.motherOf(this.fatherOf(personId).id),
+            this.motherOf(this.motherOf(personId).id)]
+        .filter(known);
   }
 
   addSon(motherId, sonsName){

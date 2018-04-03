@@ -51,7 +51,8 @@ describe('Find Relative Command', ()=> {
           sisterInLawsOf   : (personId)=> {if(personId === 'person') return [{name: 'sis-law-1'}, {name: 'sis-law-2'}]},
           auntsOf          : (personId)=> {if(personId === 'person') return [{name: 'aunt-1'}, {name: 'aunt-2'}]},
           unclesOf         : (personId)=> {if(personId === 'person') return [{name: 'uncle-1'}, {name: 'uncle-2'}]},
-          grandFatherOf    : (personId)=> {if(personId === 'person') return {name: 'grand-father'}},
+          grandFatherOf    : (personId)=> {if(personId === 'person') return [{name: 'grand-father-1'}, {name: 'grand-father-2'}]},
+          grandMotherOf    : (personId)=> {if(personId === 'person') return [{name: 'grand-mother-1'}, {name: 'grand-mother-2'}]},
         },
         findRelative  = new FindRelative(relationships),
         specs = [
@@ -117,7 +118,11 @@ describe('Find Relative Command', ()=> {
           },{
             name    : 'should find grand fatehr',
             command : 'Person = person; Relation = grand father',
-            expected: 'grand-father',
+            expected: 'grand-father-1,grand-father-2',
+          },{
+            name    : 'should find grand mother',
+            command : 'Person = person; Relation = grand mother',
+            expected: 'grand-mother-1,grand-mother-2',
           },
         ];
 

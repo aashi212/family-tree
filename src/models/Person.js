@@ -13,8 +13,11 @@ class Person{
     return this.id === personId.toLowerCase();
   }
 
+  isUnknown(){
+    return this.unknown;
+  }
   static unknown(){
-    return {... new Person(''),is : () => false, equals: () =>  false };
+    return {... new Person(''),is : () => false, equals: () =>  false, isUnknown: ()=>true };
   }
 }
 
