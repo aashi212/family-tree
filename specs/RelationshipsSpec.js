@@ -248,4 +248,22 @@ describe('Relationships',()=> {
     assert.deepEqual(actual, expected);
   });
 
+  it('should add a spouse', function() {
+    relationships.addSpouse('DaughtersSon', 'DaughtersSonWife')
+    const
+        expected = 'DaughtersSonWife',
+        actual   = relationships.sisterInLawsOf('DaughtersDaughter')[0].name;
+
+    assert.deepEqual(actual, expected);
+  });
+
+  it('should add a spouse', function() {
+    relationships.addSpouse('DaughtersDaughterHubby', 'DaughtersDaughter');
+    const
+        expected = 'DaughtersDaughterHubby',
+        actual   = relationships.brotherInLawsOf('DaughtersSon')[0].name;
+
+    assert.deepEqual(actual, expected);
+  });
+
 });

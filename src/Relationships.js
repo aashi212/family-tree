@@ -1,5 +1,6 @@
 const
     Person   = require('./models/Person'),
+    Family   = require('./models/Family'),
     males    = person => person.isMale,
     females  = person => !person.isMale,
     not      = personId => (person) => !person.is(personId),
@@ -174,6 +175,10 @@ class Relationships{
         );
 
     return allFamilies.filter(f => f.children.filter(females).length === mostDaughters).map(f => f.wife);
+  }
+
+  addSpouse(husbandId, wifeId){
+    this.familyTree.addFamily(new Family(new Person(husbandId, true), new Person(wifeId, true), []));
   }
 }
 
