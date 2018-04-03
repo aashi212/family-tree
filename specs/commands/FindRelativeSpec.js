@@ -48,8 +48,7 @@ describe('Find Relative Command', ()=> {
           cousinsOf        : (personId)=> {if(personId === 'person') return [{name: 'cousin1'}, {name: 'cousin2'}]},
           brotherInLawsOf  : (personId)=> {if(personId === 'person') return [{name: 'brow-law-1'}, {name: 'brow-law-2'}]},
           sisterInLawsOf   : (personId)=> {if(personId === 'person') return [{name: 'sis-law-1'}, {name: 'sis-law-2'}]},
-          maternalAuntsOf  : (personId)=> {if(personId === 'person') return [{name: 'm-aunt-1'}, {name: 'm-aunt-2'}]},
-          paternalAuntsOf  : (personId)=> {if(personId === 'person') return [{name: 'p-aunt-1'}, {name: 'p-aunt-2'}]},
+          auntsOf          : (personId)=> {if(personId === 'person') return [{name: 'aunt-1'}, {name: 'aunt-2'}]},
           unclesOf         : (personId)=> {if(personId === 'person') return [{name: 'uncle-1'}, {name: 'uncle-2'}]},
         },
         findRelative  = new FindRelative(relationships),
@@ -102,9 +101,9 @@ describe('Find Relative Command', ()=> {
             command : 'Person = person; Relation = Sister-in-laws',
             expected: 'sis-law-1,sis-law-2',
           },{
-            name    : 'should find maternal aunt',
-            command : 'Person = person; Relation = maternal aunt',
-            expected: 'm-aunt-1,m-aunt-2',
+            name    : 'should find aunts',
+            command : 'Person = person; Relation = aunts',
+            expected: 'aunt-1,aunt-2',
           },{
             name    : 'should find uncles',
             command : 'Person = person; Relation = uncles',

@@ -76,6 +76,12 @@ class Relationships{
     return uncles.filter((uncle, index) => uncles.indexOf(uncle) === index);
   }
 
+  auntsOf(personId){
+    const aunts = this.paternalAuntsOf(personId)
+        .concat(this.maternalAuntsOf(personId));
+    return aunts.filter((aunt, index) => aunts.indexOf(aunt) === index);
+  }
+
   maternalAuntsOf(personId){
     const mother = this.motherOf(personId);
     return this.sistersOf(mother.id)
